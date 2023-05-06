@@ -178,5 +178,5 @@ class DaskRunner(BundleBasedDirectRunner):
     dask_visitor = self.to_dask_bag_visitor()
     pipeline.visit(dask_visitor)
 
-    futures = client.compute(list(dask_visitor.bags.values()))
+    futures = client.compute(list(dask_visitor.bags.values()), sync=True)
     return DaskRunnerResult(client, futures)
